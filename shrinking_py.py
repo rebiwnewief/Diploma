@@ -45,7 +45,7 @@ def compute_optimal(m, C, dist_sum):
     dist_sum += total_cost
     print(('lowest cost=%d' % total_cost))
     print('total distance=%d' % dist_sum)
-    return indexes, dist_sum
+    return m.C, indexes, dist_sum
 
 def getSets(df, indexes):
     subsets = []
@@ -125,9 +125,9 @@ if __name__ == "__main__":
     C = create_matrix("precoli/learn/kommi/a280.tsp")
     C1 = copy.deepcopy(C)
     while (len(C1) > 2):
-        indexes, dist_sum = compute_optimal(m, C1, dist_sum)
+        C_, indexes, dist_sum = compute_optimal(m, C1, dist_sum)
         Sets0 = getSets(C1, indexes)
-        C1 = compute_new_matrix(Sets0, C1)
+        C1 = compute_new_matrix(Sets0, C_)
         C1 = compute_compression(C1, len(Sets0))
         
         
